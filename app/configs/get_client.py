@@ -16,7 +16,7 @@ import uuid
 
 def get_clickhouse_client():
     return get_client(
-        host='100.27.199.47',  # Use internal/private IP if possible
+        host='3.80.227.43',  # Use internal/private IP if possible
         port=8123,
         username='default',
         password='',
