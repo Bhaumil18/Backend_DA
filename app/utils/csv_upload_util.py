@@ -101,7 +101,7 @@ def csv_upload_util(file: UploadFile, upload_date: date):
 
     next(reader, None)  # Skip second row
 
-    url = "http://100.27.199.47:8123"
+    url = "http://3.80.227.43:8123"
     headers = {'Content-Type': 'text/csv'}
     query = "INSERT INTO diamonds FORMAT CSVWithNames"
 
