@@ -3,3 +3,4 @@ uvicorn
 clickhouse-connect
 python-multipart
 python-dotenv
+request
