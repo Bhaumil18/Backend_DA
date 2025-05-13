@@ -1,0 +1,38 @@
+Sub ConvertAllSheetsInFolderToCSV()
+    Dim wb As Workbook
+    Dim ws As Worksheet
+    Dim fileName As String
+    Dim folderPath As String
+    Dim csvPath As String
+    Dim dialog As FileDialog
+
+    Application.ScreenUpdating = False
+    Application.DisplayAlerts = False
+
+    ' Let user select folder
+    Set dialog = Application.FileDialog(msoFileDialogFolderPicker)
+    dialog.Title = "Select Folder Containing Excel Files"
+    If dialog.Show <> -1 Then Exit Sub
+    folderPath = dialog.SelectedItems(1) & "\"
+
+    fileName = Dir(folderPath & "*.xlsx")
+
+    Do While fileName <> ""
+        Set wb = Workbooks.Open(folderPath & fileName)
+
+        For Each ws In wb.Worksheets
+            csvPath = folderPath & wb.Name & "_" & ws.Name & ".csv"
+            ws.Copy
+            ActiveWorkbook.SaveAs Filename:=csvPath, FileFormat:=xlCSV
+            ActiveWorkbook.Close SaveChanges:=False
+        Next ws
+
+        wb.Close SaveChanges:=False
+        fileName = Dir
+    Loop
+
+    Application.ScreenUpdating = True
+    Application.DisplayAlerts = True
+
+    MsgBox "All files converted to CSV.", vbInformation
+End Sub
